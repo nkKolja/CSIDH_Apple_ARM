@@ -58,24 +58,24 @@ int csidh_test()
 
     if (passed == true)
     {
-        printf("   CSIDH tests..........................................PASSED");
+        printf("   CSIDH tests..........................................PASSED\n\n");
         if(!valid)
         {
-            printf("\n   Public-key Validation................................FAILED");
+            printf("\n   Public-key Validation................................FAILED\n\n");
         }else
         {
-            printf("\n   Public-key Validation................................PASSED");
+            printf("\n   Public-key Validation................................PASSED\n\n");
         }
     } 
     else
     {
-        printf("   CSIDH tests..........................................FAILED\n");
+        printf("   CSIDH tests..........................................FAILED\n\n");
         if(!valid)
         {
-            printf("\n   Public-key Validation................................FAILED");
+            printf("\n   Public-key Validation................................FAILED\n\n");
         }else
         {
-            printf("\n   Public-key Validation................................PASSED");
+            printf("\n   Public-key Validation................................PASSED\n\n");
         }
     
         return 0;   // FAILED
@@ -91,6 +91,20 @@ void csidh_bench()
     private_key_t alice_priv, bob_priv;
     shared_secret_t alice_shared, bob_shared;
     unsigned long long cycles, start, end, alice_total = 0, bob_total = 0;
+
+
+
+    felm_t a[50] = {0}, b[55] = {0}, c[60] = {0};
+    for(i = 0; i < 60; i++){
+        fp_random_512(a[i%50]);
+        fp_random_512(b[i%55]);
+        fp_random_512(c[i%60]);
+    }
+
+
+
+
+
 
     fp_init_zero(alice_pub->A);
     fp_init_zero(bob_pub->A);
@@ -183,14 +197,6 @@ void csidh_bench()
     printf("Bob Total computations runs in...........................%10lld nsec\n\n", bob_total);
 
 
-    felm_t a[50] = {0}, b[55] = {0}, c[60] = {0};
-    for(i = 0; i < 60; i++){
-        fp_random_512(a[i%50]);
-        fp_random_512(b[i%55]);
-        fp_random_512(c[i%60]);
-    }
-
-
     cycles = 0;
         start = cpucycles();
     for(i = 0; i < ARITH_BENCH; i++)
@@ -199,13 +205,23 @@ void csidh_bench()
     }
         end = cpucycles();
         cycles = cycles + (end - start);
-    printf("fp_mul_mont_512 runs in.........................%10lld nsec\n", cycles/ARITH_BENCH);
+    printf("\n..................BENCHMARKING MULTIPLICATION..................\n");
+    printf("---------------------------------------------------------------\n\n");
+    printf("fp_mul_mont_512 runs in ............................%6lld nsec\n\n", cycles/ARITH_BENCH);
+    printf("...............................................................\n\n");
+
+
+
 
     return;
 }
 
 int main()
 {
+    csidh_bench();
+
+
+
     int passed = 1;
     passed = csidh_test();
 
@@ -214,6 +230,5 @@ int main()
         printf("\n\n Error: SHARED_KEY");
     }
 
-    csidh_bench();
     return passed;
 }

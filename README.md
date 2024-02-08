@@ -1,10 +1,8 @@
 # NOVAK
 
-To run, do:
-```
-make clean; make; ./test_arith; ./test_csidh; make clean
-```
-The file arith_asm.S holds the assembly code of the multiplication
+To run, do 
+`make clean; make; ./test_arith; ./test_csidh; make clean`
+arith_asm.S holds the assembly code of the multiplication
 
 ---
 
