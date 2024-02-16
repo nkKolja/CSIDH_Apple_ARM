@@ -9,7 +9,6 @@
 #define ARITH_BENCH 20000
 #define TEST_COUNT 1
 
-typedef uint64_t felm_jan[NWORDS_64 * 2];
 
 int64_t cpucycles(void)
 { // Access system counter for benchmarking
