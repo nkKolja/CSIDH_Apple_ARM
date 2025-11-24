@@ -1,14 +1,28 @@
-# NOVAK
+# Apple ARMv8.5 CSIDH
+
+An Apple ARMv8.5 compatible implementation of the post-quantum non-interactive key exchange protocol [CSIDH](https://csidh.isogeny.org/).
+
+Contributions:
+- Added Apple ARMv8.5 implementation on top of the [original ARMv8 implementation](https://github.com/amirjalali65/ARMv8-CSIDH) of CSIDH.
+- Refactored field arithmetic for the p511 field.
+- Tested on Apple M3 and M4 processors.
 
 To run, do 
 ```
-make clean; make CONSTANT=TRUE; ./test_arith; ./test_csidh; make clean
+make CONSTANT=TRUE; ./test_arith; ./test_csidh; make clean
 ```
-arith_asm.S holds the assembly code of the multiplication
+The file `arith_asm.S` holds the assembly code of the multiplication
+
+## Contributor: Novak Kaluđerović
+
+Original repo - https://github.com/amirjalali65/ARMv8-CSIDH
+
+Original contributors - below.
+
 
 ---
 
-# ARMv8-CSIDH v1.0
+# ARMv8-CSIDH v1.0 (Original)
 Optimized and Constant-time implementation of Post-Quantum Commutative Supersingular Isogeny Diffie-Hellman (CSIDH) key exchange on ARMv8 Processors.
 
 This repository contains an highly-optimized implementation of CSIDH on ARMv8 processors. The finite field arithmetic is designed and engineered for the p511 prime proposed in the original [CSIDH](https://eprint.iacr.org/2018/383.pdf) scheme by Castryck et al. 
